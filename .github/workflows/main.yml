@@ -72,7 +72,7 @@ jobs:
         if: env.DEPLOY == 'false'
        
         run: |
-          sed -i "s|image: 12sergey12/myapp:.*|image: ${{ env.IMAGE_TAG }}|" ./myapp/deploy.yaml
+          sed -i "s|image: maltsevvm/nginx-static-app:.*|image: ${{ env.IMAGE_TAG }}|" ./myapp/deploy.yaml
         env:
           IMAGE_TAG: maltsevvm/nginx-static-app:${{ env.VERSION }}
       
