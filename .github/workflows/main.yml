@@ -62,6 +62,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: List files in the working directory
+        run: |
+          ls -la
+
       - name: Set up Kubernetes
         uses: azure/setup-kubectl@v3
         with:
@@ -85,6 +89,10 @@ jobs:
 
       - name: Replace image tag in deploy.yaml
         run: |
+          if [ ! -f ./deploy.yaml ]; then
+            echo "deploy.yaml not found in the current directory"
+            exit 1
+          fi
           sed -i "s|image: maltsevvm/nginx-static-app:.*|image: ${{ env.IMAGE_TAG }}:${{ env.VERSION }}|" ./deploy.yaml
 
       - name: Create kubeconfig
@@ -101,7 +109,7 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f ./myapp/deploy.yaml
+          kubectl apply -f ./deploy.yaml
           kubectl get deployments -n monitoring
           kubectl get pods -n monitoring
           kubectl describe deployment myapp -n monitoring
