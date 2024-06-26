@@ -13,9 +13,9 @@ spec:
       app: myapp
   template:
     metadata:
+      namespace: monitoring
       labels:
         app: myapp
-      namespace: monitoring
     spec:
       containers:
       - name: myapp
@@ -23,6 +23,7 @@ spec:
         ports:
           - containerPort: 80
             name: http
+      restartPolicy: Always
 
 ---
 apiVersion: v1
@@ -37,6 +38,5 @@ spec:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: 80
-      nodePort: 31000
+      nodePort: 30080
   type: NodePort
