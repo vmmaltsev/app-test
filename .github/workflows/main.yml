@@ -93,7 +93,7 @@ jobs:
             echo "deploy.yaml not found in the current directory"
             exit 1
           fi
-          sed -i "s|image: maltsevvm/nginx-static-app:.*|image: ${{ env.IMAGE_TAG }}:${{ env.VERSION }}|" ./deploy.yaml
+          sed -i "s|image: maltsevvm/nginx-static-app:.*|image: ${{ env.IMAGE_TAG }}:${{ env.VERSION }}|" ./myapp/deploy.yaml
 
       - name: Create kubeconfig
         run: |
