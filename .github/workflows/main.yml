@@ -89,7 +89,7 @@ jobs:
 
       - name: Replace image tag in deploy.yaml
         run: |
-          if [ ! -f ./deploy.yaml ]; then
+          if [ ! -f ./myapp/deploy.yaml ]; then
             echo "deploy.yaml not found in the current directory"
             exit 1
           fi
@@ -109,7 +109,7 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f ./deploy.yaml
+          kubectl apply -f ./myapp/deploy.yaml
           kubectl get deployments -n monitoring
           kubectl get pods -n monitoring
           kubectl describe deployment myapp -n monitoring
