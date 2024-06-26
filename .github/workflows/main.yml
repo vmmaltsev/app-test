@@ -101,7 +101,7 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f ./deploy.yaml
+          kubectl apply -f ./myapp/deploy.yaml
           kubectl get deployments -n monitoring
           kubectl get pods -n monitoring
           kubectl describe deployment myapp -n monitoring
